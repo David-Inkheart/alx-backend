@@ -60,3 +60,32 @@ Implement a method named ```get_page``` that takes two integer arguments ```page
 - Use `assert` to verify that both arguments are integers greater than 0.
 - Use `index_range` to find the correct indexes to paginate the dataset correctly and return the appropriate page of the dataset (i.e. the correct list of rows).
 - If the input arguments are out of range for the dataset, an empty list should be returned.
+```
+bob@dylan:~$  wc -l Popular_Baby_Names.csv 
+19419 Popular_Baby_Names.csv
+bob@dylan:~$  
+bob@dylan:~$ head Popular_Baby_Names.csv
+Year of Birth,Gender,Ethnicity,Child's First Name,Count,Rank
+2016,FEMALE,ASIAN AND PACIFIC ISLANDER,Olivia,172,1
+2016,FEMALE,ASIAN AND PACIFIC ISLANDER,Chloe,112,2
+2016,FEMALE,ASIAN AND PACIFIC ISLANDER,Sophia,104,3
+2016,FEMALE,ASIAN AND PACIFIC ISLANDER,Emma,99,4
+2016,FEMALE,ASIAN AND PACIFIC ISLANDER,Emily,99,4
+2016,FEMALE,ASIAN AND PACIFIC ISLANDER,Mia,79,5
+2016,FEMALE,ASIAN AND PACIFIC ISLANDER,Charlotte,59,6
+2016,FEMALE,ASIAN AND PACIFIC ISLANDER,Sarah,57,7
+2016,FEMALE,ASIAN AND PACIFIC ISLANDER,Isabella,56,8
+bob@dylan:~$  
+```
+
+```
+bob@dylan:~$ 
+bob@dylan:~$ ./1-main.py
+AssertionError raised with negative values
+AssertionError raised with 0
+AssertionError raised when page and/or page_size are not ints
+[['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Olivia', '172', '1'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Chloe', '112', '2'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Sophia', '104', '3']]
+[['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Emily', '99', '4'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Mia', '79', '5']]
+[]
+bob@dylan:~$ 
+```
