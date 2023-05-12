@@ -6,7 +6,7 @@
 
 # Tasks
 
-## 0. [Simple helper function](./0-simple_helper_function.py)
+### [0. Simple helper function](./0-simple_helper_function.py)
 
 Write a function named ```index_range``` that takes two integer arguments ```page``` and ```page_size```.
 
@@ -21,3 +21,42 @@ bob@dylan:~$ ./0-main.py
 (30, 45)
 bob@dylan:~$
 ```
+
+### [1. Simple pagination](./1-simple_pagination.py)
+
+Copy ```index_range``` from the previous task and the following class into your code.
+```
+import csv
+import math
+from typing import List
+
+
+class Server:
+    """Server class to paginate a database of popular baby names.
+    """
+    DATA_FILE = "Popular_Baby_Names.csv"
+
+    def __init__(self):
+        self.__dataset = None
+
+    def dataset(self) -> List[List]:
+        """Cached dataset
+        """
+        if self.__dataset is None:
+            with open(self.DATA_FILE) as f:
+                reader = csv.reader(f)
+                dataset = [row for row in reader]
+            self.__dataset = dataset[1:]
+
+        return self.__dataset
+
+    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+            pass
+```
+
+Implement a method named ```get_page``` that takes two integer arguments ```page``` with default value 1 and ```page_size``` with default value 10.
+
+- You have to use this [CSV file](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/misc/2020/5/7d3576d97e7560ae85135cc214ffe2b3412c51d7.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20230512%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230512T084414Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=f125c3029cc7503a5bb9d7bbf834bab3eacd4df6d51afe547d595c17e8d6c772) (same as the one presented at the top of the project)
+- Use `assert` to verify that both arguments are integers greater than 0.
+- Use `index_range` to find the correct indexes to paginate the dataset correctly and return the appropriate page of the dataset (i.e. the correct list of rows).
+- If the input arguments are out of range for the dataset, an empty list should be returned.
