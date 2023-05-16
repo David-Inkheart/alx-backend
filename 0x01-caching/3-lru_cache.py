@@ -6,7 +6,7 @@ from collections import OrderedDict
 BaseCaching = __import__('base_caching').BaseCaching
 
 
-class LIFOCache(BaseCaching):
+class LRUCache(BaseCaching):
     """A catching system that inherits from BaseCaching and
     implements a LRU replacement policy."""
 
@@ -17,17 +17,22 @@ class LIFOCache(BaseCaching):
 
     def put(self, key, item):
         """assign to the dictionary self.cache_data the item
-        value for the key key"""
+        value for the key"""
         if key and item:
-            # Check if the cache is already full
-            if len(self.cache_data) >= self.MAX_ITEMS:
-                # Discard the most recent item
-                last_key = next(reversed(self.cache_data))
-                print("DISCARD: {}".format(last_key))
-                del self.cache_data[last_key]
+            if key in self.cache_data:
+                # Move the existing item to the end of the dict
+                self.cache_data.pop(key)
+            elif len(self.cache_data) >= self.MAX_ITEMS:
+                # Remove the least recently used item
+                least_used, _ = self.cache_data.popitem(last=False)
+                print("DISCARD: {}".format(least_used))
             self.cache_data[key] = item
 
     def get(self, key):
         """return the value in self.cache_data
         linked to key"""
-        return self.cache_data.get(key)
+        if key in self.cache_data:
+            # Move the accessed item to the end of the OrderedDict
+            value = self.cache_data.pop(key)
+            self.cache_data[key] = value
+            return value or None
