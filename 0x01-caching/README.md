@@ -286,3 +286,95 @@ guillaume@ubuntu:~/0x01$
 ```
 
 **[5. LFU Caching](./100-lfu_cache.py)**
+
+Create a class `LFUCache` that inherits from `BaseCaching` and is a caching system:
+- You must use `self.cache_data` - dictionary from the parent class `BaseCaching`
+- You can overload `def __init__(self):` but don’t forget to call the parent init: `super().__init__()`
+- `def put(self, key, item):`
+    - Must assign to the dictionary `self.cache_data` the `item` value for the key `key`
+    - If `key` or `item` is `None`, this method should not do anything
+    - If the number of items in `self.cache_data` is higher that `BaseCaching.MAX_ITEMS`:
+        - must discard the least frequently used item (LFU algorithm)
+        - must print `DISCARD:` with the `KEY` discarded and following by a new line
+- `def get(self, key):`
+    - Must return the value in `self.cache_data` linked to `key`
+    - If `key` is `None` or if the key doesn’t exist in `self.cache_data`, return `None`.
+
+```
+guillaume@ubuntu:~/0x01$ ./100-main.py
+Current cache:
+A: Hello
+B: World
+C: Holberton
+D: School
+World
+DISCARD: A
+Current cache:
+B: World
+C: Holberton
+D: School
+E: Battery
+Current cache:
+B: World
+C: Street
+D: School
+E: Battery
+None
+World
+Street
+DISCARD: D
+Current cache:
+B: World
+C: Street
+E: Battery
+F: Mission
+DISCARD: E
+Current cache:
+B: World
+C: Street
+F: Mission
+G: San Francisco
+DISCARD: F
+Current cache:
+B: World
+C: Street
+G: San Francisco
+H: H
+DISCARD: G
+Current cache:
+B: World
+C: Street
+H: H
+I: I
+I
+H
+I
+H
+I
+H
+DISCARD: B
+Current cache:
+C: Street
+H: H
+I: I
+J: J
+DISCARD: J
+Current cache:
+C: Street
+H: H
+I: I
+K: K
+DISCARD: K
+Current cache:
+C: Street
+H: H
+I: I
+L: L
+DISCARD: L
+Current cache:
+C: Street
+H: H
+I: I
+M: M
+guillaume@ubuntu:~/0x01$ 
+```
