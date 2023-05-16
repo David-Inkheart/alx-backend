@@ -378,3 +378,21 @@ I: I
 M: M
 guillaume@ubuntu:~/0x01$ 
 ```
+
+```
+In order to implement the LFUCache class, I used the following logic:
+
+In the __init__ method, I called the constructor of the parent class (BaseCaching) and initialized additional data structures. I used an OrderedDict called cache_data to store the key-value pairs in the cache, and a defaultdict called item_freq to store the frequency of each item.
+
+In the put method, I first checked if the key or item is None. If either of them is None, I returned without performing any operation.
+
+If the key already exists in the cache (cache_data), I updated the item value and increased its frequency. To maintain the LFU property, I moved the item to the end of the cache by calling the update_cache_order method.
+
+If the cache is full (the number of items in cache_data is greater than or equal to MAX_ITEMS), I needed to discard the least frequently used item(s). To determine the least frequent item(s), I found the minimum frequency in item_freq and identified the items with that frequency. If there were multiple items with the minimum frequency, I used the LRU (Least Recently Used) tiebreaker to choose the item to discard. I removed the LFU item from both item_freq and cache_data and printed a message indicating the discarded key.
+
+Finally, if the key is not already in the cache, I checked if the cache is full. If it is, I followed the same procedure as mentioned above to discard the least frequent item(s). Then, I added the new item to the cache with a frequency of 1.
+
+In the get method, I first checked if the key is None or if it doesn't exist in the cache. In such cases, I returned None. Otherwise, I increased the frequency of the accessed item, updated its position in the cache using update_cache_order, and returned its value.
+
+By implementing the above logic, the LFUCache class effectively maintains a cache based on the LFU algorithm and handles the eviction of least frequently used items, using LRU tiebreaker if needed.
+```
