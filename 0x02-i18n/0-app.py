@@ -6,7 +6,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/', method=['GET'],  strict_slashes=False)
 def index():
     """ Returns: 0-index.html """
     header = "Hello world"
