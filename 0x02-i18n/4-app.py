@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ Basic Flask app """
 
-from typing import Union
 from flask import Flask, render_template, request
 from flask_babel import Babel, _
 
@@ -19,7 +18,7 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale() -> Union[str, None]:
+def get_locale() -> str:
     """ get locale from request and return best match"""
     locale = request.args.get('locale')
     if locale and locale in app.config['LANGUAGES']:
