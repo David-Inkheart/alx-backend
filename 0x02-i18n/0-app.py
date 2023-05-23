@@ -11,8 +11,3 @@ def index():
     """ Returns: 0-index.html """
     header = "Hello world"
     return render_template('0-index.html', header=header)
-
-
-if __name__ == '__main__':
-    """ Main Function"""
-    app.run()
