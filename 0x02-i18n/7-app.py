@@ -60,6 +60,7 @@ def get_locale() -> str:
 # Alternative way to use babel.localeselector
 # babel.init_app(app, locale_selector=get_locale)
 
+
 @babel.timezoneselector
 def get_timezone() -> str:
     """ get timezone from request and return"""
@@ -80,14 +81,15 @@ def get_timezone() -> str:
         pass
     return app.config['BABEL_DEFAULT_TIMEZONE']
 
+
 # Alternative way to use babel.timezoneselector
 # babel.init_app(app, timezone_selector=get_timezone)
 
 
 @app.route('/', strict_slashes=False)
 def index() -> str:
-    """ Returns: 6-index.html """
-    return render_template('6-index.html')
+    """ Returns: 7-index.html """
+    return render_template('7-index.html')
 
 
 if __name__ == '__main__':
