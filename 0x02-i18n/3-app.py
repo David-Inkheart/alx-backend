@@ -4,6 +4,9 @@
 from flask import Flask, render_template, request
 from flask_babel import Babel, _
 
+app = Flask(__name__)
+babel = Babel(app)
+
 
 class Config(object):
     """ Config class for Babel object """
@@ -12,18 +15,13 @@ class Config(object):
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
-app = Flask(__name__)
 app.config.from_object(Config)
-babel = Babel(app)
 
 
 @babel.localeselector
 def get_locale():
-    """ get locale from request """
+    """ get locale from request and return best match"""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
-# babel.init_app(app, locale_selector=get_locale)
 
 
 @app.route('/', strict_slashes=False)
