@@ -32,7 +32,6 @@ describe('createPushNotificationsJobs', () => {
   it('display an error message if jobs is not an array', () => {
     expect(() => createPushNotificationsJobs('hello', queue)).to.throw(Error, 'Jobs is not an array');
   });
-  console.log(createPushNotificationsJobs(jobs, queue));
   it('create two new jobs to the queue', () => {
     const queueSpy = spy(queue, 'create');
     createPushNotificationsJobs(jobs, queue);
